@@ -13,6 +13,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var operator = ""
     private var lastButtonWasOperator = false
 
+    companion object {
+        private const val OPERAND1_KEY = "operand1"
+        private const val OPERATOR_KEY = "operator"
+        private const val LAST_BUTTON_KEY = "lastButtonWasOperator"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,6 +36,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         for (button in buttons) {
             button.setOnClickListener(this)
         }
+
+        // Restaurar el estado si existe
+        savedInstanceState?.let {
+            operand1 = it.getString(OPERAND1_KEY, "")
+            operator = it.getString(OPERATOR_KEY, "")
+            lastButtonWasOperator = it.getBoolean(LAST_BUTTON_KEY, false)
+            tvResult.text = operand1
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(OPERAND1_KEY, operand1)
+        outState.putString(OPERATOR_KEY, operator)
+        outState.putBoolean(LAST_BUTTON_KEY, lastButtonWasOperator)
     }
 
     override fun onClick(v: View?) {
@@ -42,15 +63,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btnClear -> clear()
         }
     }
-    // Para añadir un digito al resultado
+
+    // Para añadir un dígito al resultado
     private fun appendDigit(digit: String) {
         if (lastButtonWasOperator) {
-            tvResult.text = " "
+            tvResult.text = ""
         }
         tvResult.append(digit)
         lastButtonWasOperator = false
     }
-    // para decidir que operador usar
+
+    // Para decidir qué operador usar
     private fun setOperator(op: String) {
         if (tvResult.text.isNotEmpty()) {
             operand1 = tvResult.text.toString()
@@ -58,7 +81,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             lastButtonWasOperator = true
         }
     }
-    // resultado de operacion
+
+    // Resultado de operación
     private fun calculateResult() {
         if (operand1.isNotEmpty() && operator.isNotEmpty() && tvResult.text.isNotEmpty()) {
             val operand2 = tvResult.text.toString()
@@ -74,6 +98,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             operator = ""
         }
     }
+
     // Método para reiniciar la calculadora
     private fun clear() {
         operand1 = ""
@@ -82,3 +107,4 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         lastButtonWasOperator = false
     }
 }
+
