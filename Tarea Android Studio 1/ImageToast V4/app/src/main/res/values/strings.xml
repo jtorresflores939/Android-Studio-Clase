@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ImageToast4</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image_description">Descripcion de Imagen</string>
+</resources>
