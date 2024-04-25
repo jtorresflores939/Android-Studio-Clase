@@ -17,13 +17,13 @@ class ImageDisplayFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_image_display, container, false)
 
-        // Initialize views
+        //Inicializar las views
         imageView = view.findViewById(R.id.imageView)
 
-        // Get selected image from arguments
+        //Un get para las imagenes seleccionadas de los arguments
         val selectedImage = arguments?.getString("selectedImage")
 
-        // Set selected image to ImageView
+        //Set selectedImage a ImageView
         val resourceId = resources.getIdentifier(selectedImage, "drawable", requireActivity().packageName)
         imageView.setImageResource(resourceId)
 

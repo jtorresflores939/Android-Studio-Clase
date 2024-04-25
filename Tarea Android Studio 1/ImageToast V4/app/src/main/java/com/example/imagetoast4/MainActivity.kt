@@ -11,12 +11,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         if (savedInstanceState == null) {
-            // Show ImageSelectionFragment when activity is first created
+            //Muestra el fragment de ImageSelection
             showImageSelectionFragment()
         }
     }
 
-    // Method to show ImageSelectionFragment
+    //Metodo para mostrar el fragmento de ImageSelection
     fun showImageSelectionFragment() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         val fragment = ImageSelectionFragment()
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    // Method to show ImageDisplayFragment
+    //Metodo para mostrar el fragmento de ImageDisplay
     fun showImageDisplayFragment(selectedImage: String) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         val fragment = ImageDisplayFragment()

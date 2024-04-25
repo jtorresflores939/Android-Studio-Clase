@@ -20,16 +20,16 @@ class ImageSelectionFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_image_selection, container, false)
 
-        // Initialize views
+        //Inicializar las views
         imageSpinner = view.findViewById(R.id.imageSpinner)
         nextButton = view.findViewById(R.id.nextButton)
 
-        // Configure image spinner
+        //Configurar el spinner para las imagenes
         val imageNames = arrayOf("image1", "image2", "image3")
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, imageNames)
         imageSpinner.adapter = adapter
 
-        // Configure Next button click listener
+        // Configurar el boton de next
         nextButton.setOnClickListener {
             // Notify MainActivity to switch to ImageDisplayFragment
             (requireActivity() as MainActivity).showImageDisplayFragment(imageSpinner.selectedItem as String)
